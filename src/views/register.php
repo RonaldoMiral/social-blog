@@ -18,7 +18,7 @@
 <body>
     <div class="container">
         <h1>Criar Conta</h1>
-        <form action="./register_form.php" method="post">
+        <form action="<?php echo BASE_URL.'public/register/new-user';?>" method="post">
             <div class="form-group">
                 <label for="nameId">Nome de Usuário</label>
                 <input type="text" name="name" id="nameId">
@@ -36,16 +36,16 @@
                 <input type="password" name="confirmPassword" id="confirmPasswordId">
             </div>
 
-            <button type="submit">Submeter</button>
+            <button type="submit" name="sender">Submeter</button>
         </form>
 
         <a href="<?php echo BASE_URL.'public/login';?>">Entrar</a>
     </div>
 
     <script>
-        document.querySelector('button').addEventListener('click', event => {
-            event.preventDefault();
-        })
+        // document.querySelector('button').addEventListener('click', event => {
+        //     event.preventDefault();
+        // })
     </script>
 </body>
 
