@@ -3,16 +3,15 @@
 require_once __DIR__.'/../../vendor/autoload.php';
 
 use Core\View;
-use Source\Models\UserModel;
+use Source\Models\PostModel;
+
 
 class HomeController extends View {
     public function index() {
-        $users_instance = new UserModel();
-        $users = $users_instance->loadUsers();
-
-        $res = $users;
+        $posts_instance = new PostModel();
+        $posts = $posts_instance->loadAllPosts();
 
 
-        $this->render("home", $users);
+        $this->render("home", $posts);
     }
 }

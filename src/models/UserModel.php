@@ -6,7 +6,7 @@ use PDO;
 
 
 class UserModel extends Model {
-    private $users_table = 'users';
+    private $table = 'users';
 
     public function loadUsers() {
         $query = "SELECT * FROM users";
@@ -18,7 +18,7 @@ class UserModel extends Model {
 
     public function saveUser($user_data) {
         extract($user_data);
-        $query = "INSERT INTO {$this->users_table}(username, email, user_password)
+        $query = "INSERT INTO {$this->table}(username, email, user_password)
             VALUES (:username, :email, :user_password)";
         
         $statement = $this->db->prepare($query);

@@ -1,0 +1,40 @@
+body {
+    padding: 2.4rem;
+}
+
+header {
+    margin-bottom: 2.4rem;
+}
+
+
+
+ul {
+    list-style: none;
+    margin: auto;
+    display: flex;
+    gap: 1.6rem;
+    flex-wrap: wrap;
+}
+
+li {
+    border: .1rem solid black;
+    cursor: pointer;
+    width: 20rem;
+    height: 15rem;
+    border-radius: .5rem;
+
+    display: grid;
+    grid-template-rows: 30% 1fr;
+    justify-items: center;
+    row-gap: 1rem;
+    padding: 1rem;
+}
+
+li strong {
+    overflow-y: hidden;
+}
+
+li p {
+    overflow-y: hidden;
+    word-break: break-word;
+}
