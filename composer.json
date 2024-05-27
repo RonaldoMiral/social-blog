@@ -1,0 +1,17 @@
+{
+    "name": "slayking/blog",
+    "type": "library",
+    "autoload": {
+        "psr-4": {
+            "Source\\": "src/",
+            "Core\\": "core/"
+        }
+    },
+    "authors": [
+        {
+            "name": "SlayKing",
+            "email": "ronaldomiralp@gmail.com"
+        }
+    ],
+    "require": {}
+}
