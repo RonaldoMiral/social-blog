@@ -1,0 +1,24 @@
+.post {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    word-break: break-all;
+    min-height: 100vh;
+    /* gap: 3.2rem;
+     */
+     padding: 2.4rem;
+}
+
+.post p {
+    flex: 1 1 0;
+    margin: 2rem 0;
+}
+
+.post .post-footer {
+    height: 5rem;
+    background-color: silver;
+    display: flex;
+    align-items: center;
+    width: 100%;
+    text-align: center;
+}

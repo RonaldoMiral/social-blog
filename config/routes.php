@@ -6,7 +6,8 @@
         '/register' => 'UserController@loadSignUpForm',
         '/register/new-user' => 'UserController@newUser',
         '/create-post-form' => 'PostController@createPostForm',
-        '/create-post' => 'PostController@createPost'
+        '/create-post' => 'PostController@createPost',
+        '/posts/{id}' => 'PostController@post'
     ];
 
 ?>

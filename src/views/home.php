@@ -21,7 +21,7 @@
         <ul>
             <?php
                 foreach($data as $key => $value) {
-                    echo "<li>";
+                    echo "<li class='post' data-id={$value['id']}>";
                         echo "<strong>".$value['title']."</strong>";
                         echo "<p>".$value['content']."</p>";
                     echo "</li>";
@@ -29,6 +29,19 @@
             ?>
         </ul>
     </main>
+
+    <script>
+        const posts = Array.from(document.querySelectorAll('.post'));
+
+        posts.forEach(post => {
+            post.addEventListener('click', () => {
+                window.location = `${post.baseURI}posts/${post.dataset.id}`;
+            });
+        })
+
+        console.log(posts);
+
+    </script>
 
     <!-- <a href="<?php echo BASE_URL . 'public/login';?>">Login</a> -->
 </body>

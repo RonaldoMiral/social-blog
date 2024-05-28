@@ -3,6 +3,8 @@
     namespace Source\Models;
     use Core\Model;
     use PDO;
+use PDOException;
+use PDORow;
 
     class PostModel extends Model {
         private $table = 'posts';
@@ -22,6 +24,20 @@
             $statement = $this->db->prepare($query);
             $args = [':title' => $title, ':content' => $content];
             return $statement->execute($args);
+        }
+
+        public function bringUser($id) {
+            try {
+
+                $query = "SELECT * FROM {$this->table} WHERE id = :id";
+                $statement = $this->db->prepare($query);
+                $statement->execute([':id' => $id]);
+    
+                return $statement->fetch(PDO::FETCH_ASSOC);
+            } catch (PDOException $err) {
+                echo "Error: " . $err->getMessage();
+                return false;
+            }
         }
     
         public function validatePostData($title, $content) {
