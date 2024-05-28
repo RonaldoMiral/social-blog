@@ -1,5 +1,10 @@
 <?php
+    session_start();
     require_once preg_replace("/src.*/", "config/config.php", __DIR__);
+    // if (!isset($_SESSION['user_id'])) {
+    //     header('Location: '.BASE_URL.'public/login');
+    //     exit;
+    // }
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -13,8 +18,15 @@
     <link rel="stylesheet" href="./css/home.css">
 </head>
 <body>
-    <header>
+    <header class="head">
         <h1>BlogSocial</h1>
+
+        <?php if(isset($_SESSION['user_id'])) {
+            $icon = strtoupper(str_split($_SESSION['username'])[0]);
+            echo "<div class='perfil'>{$icon}</div>";
+        } else {
+            echo "<a href=".BASE_URL."public/login".">Entrar</a>";
+        }?>
     </header>
 
     <main>
@@ -43,6 +55,5 @@
 
     </script>
 
-    <!-- <a href="<?php echo BASE_URL . 'public/login';?>">Login</a> -->
 </body>
 </html>

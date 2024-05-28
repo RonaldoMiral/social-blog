@@ -16,7 +16,7 @@
 <body>
     <div class="container">
         <h1>Entrar</h1>
-        <form action="">
+        <form action="<?php echo BASE_URL . 'public/login/authenticate';?>" method="POST">
             <div class="form-group">
                 <label for="nameId">Nome de Usuário</label>
                 <input type="text" name="name" id="nameId">

@@ -4,8 +4,30 @@ body {
 
 header {
     margin-bottom: 2.4rem;
+
 }
 
+.head {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.head div {
+    background-color: black;
+    height: 3.5rem;
+    aspect-ratio: 1/1;
+    color: wheat;
+    font-weight: 700;
+    border-radius: 50%;
+    display: grid;
+    place-items: center;
+    cursor: pointer;
+}
+
+.head a {
+    text-decoration: none;
+}
 
 
 ul {

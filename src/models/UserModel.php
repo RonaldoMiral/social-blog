@@ -16,6 +16,15 @@ class UserModel extends Model {
         return $statement->fetchAll(PDO::FETCH_ASSOC);
     }
 
+    public function loadUser($username) {
+        $query = "SELECT * FROM users WHERE username = :username";
+        $statement = $this->db->prepare($query);
+        $args = [':username' => $username];
+        $statement->execute($args);
+
+        return $statement->fetch(PDO::FETCH_ASSOC);
+    }
+
     public function saveUser($user_data) {
         extract($user_data);
         $query = "INSERT INTO {$this->table}(username, email, user_password)
