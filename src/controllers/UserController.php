@@ -1,87 +1,107 @@
 <?php
-session_start();
-require_once preg_replace("/src.*/", "config/config.php", __DIR__);
+
+namespace Source\Controllers;
+// session_start();
 use Core\View;
 use Source\Models\UserModel;
+use Exception;
 
-class UserController extends View
+class UserController
 {
     private $user;
+    private $user_id;
 
     public function __construct()
     {
         $this->user = new UserModel();
+        $this->user_id = isset($_SESSION["user_id"]) ? $_SESSION["user_id"] : null;
     }
 
-    public function index()
+    public function createNewUser()
     {
-        echo "<h1>Be welcome to the user controller</h1>";
-    }
+        View::render('register');
 
-    public function loadSignUpForm()
-    {
-        $this->render("register");
-    }
+        if ($_SERVER['REQUEST_METHOD'] !== 'POST' && !isset($_POST['sender'])) return;
 
-    public function loadSingInForm()
-    {
-        $this->render("login");
-    }
-
-    public function auth()
-    {
-        if (!isset($_POST['name']) || !isset($_POST['password'])) {
-            echo "Some requested inputs are not defined";
-            return;
-        }
-
-        $name = $_POST['name'];
-        $password = $_POST['password'];
-
-        if(empty($name) || empty($password)) {
-            echo "Please fill in all the fields";
-            return;
-        }
-
-        $result = $this->user->loadUser($name);
-
-        if($result && password_verify($password, $result['user_password'])) {
-            $_SESSION['user_id'] = $result['id'];
-            $_SESSION['username'] = $result['username'];
-            header('Location: '.BASE_URL.'public/');
-            exit;
-        } else {
-            echo 'Invalid username or password';
-        }
-    }
-
-    public function newUser()
-    {
         if (
-            !isset($_POST['name']) || !isset($_POST['email']) ||
-            !isset($_POST['password']) || !isset($_POST['confirmPassword'])
+            filter_input(INPUT_POST, 'name', FILTER_DEFAULT) === null ||
+            filter_input(INPUT_POST, 'email', FILTER_DEFAULT) === null ||
+            filter_input(INPUT_POST, 'password', FILTER_DEFAULT) === null ||
+            filter_input(INPUT_POST, 'confirmPassword', FILTER_DEFAULT) === null
         ) {
-            echo "Some requested inputs are not defined";
+            echo "The requested fields are not defined";
             return;
         }
 
-        $name = $_POST['name'];
-        $email = $_POST['email'];
-        $password = $_POST['password'];
-        $confirmPassword = $_POST['confirmPassword'];
+        $name = filter_input(INPUT_POST, 'name', FILTER_DEFAULT);
+        $email = filter_input(INPUT_POST, 'email', FILTER_VALIDATE_EMAIL);
+        $password = filter_input(INPUT_POST, 'password', FILTER_DEFAULT);
+        $confirm_password = filter_input(INPUT_POST, 'confirmPassword', FILTER_DEFAULT);
 
-
-        $result = $this->user->validateUserData($name, $email, $password, $confirmPassword);
-
-        if ($result !== true) {
-            echo $result;
+        $validation = $this->user->validateUserData($name, $email, $password, $confirm_password);
+        if ($validation !== true) {
+            echo $validation;
             return;
         }
 
         $user_data = ['name' => $name, 'email' => $email, 'password' => $password];
-        if ($this->user->saveUser($user_data)) {
-            echo "User saved successfully";
-            header('Location: '.BASE_URL.'public/');
+        $created = $this->user->saveNewUser($user_data);
+        if ($created) {
+            header('Location: ' . BASE_URL);
+        } else {
+            echo "Error: user not created";
+            return;
         }
+    }
+
+    public function signIn()
+    {
+        View::render('login');
+
+
+        if ($_SERVER['REQUEST_METHOD'] !== 'POST' && !isset($_POST['sender'])) return;
+
+        if (
+            filter_input(INPUT_POST, 'name', FILTER_DEFAULT) === null ||
+            filter_input(INPUT_POST, 'password', FILTER_DEFAULT) === null
+        ) {
+            echo "The requested fields are not defined";
+            return;
+        }
+
+        $username = filter_input(INPUT_POST, 'name', FILTER_DEFAULT);
+        $password = filter_input(INPUT_POST, 'password', FILTER_DEFAULT);
+
+        if (empty($username) || empty($password)) {
+            echo "Please fill in all the fields";
+            return;
+        }
+
+        try {
+            $user = $this->user->getUserByUsername($username);
+
+            if (password_verify($password, $user["user_password"])) {
+                $_SESSION["user_id"] = $user["id"];
+                $_SESSION["username"] = $user["username"];
+
+                header('Location: ' . BASE_URL);
+            }
+        } catch (Exception $error) {
+            echo "Error: " . $error->getMessage();
+            return;
+        }
+    }
+
+    public function loadUserData()
+    {
+        $post_controller = new PostController();
+        $user_posts = $post_controller->loadPostsByUserId($this->user_id);
+
+        View::render('user', $user_posts);
+    }
+
+    public function logOut() {
+        session_destroy();
+        header('Location: ' . BASE_URL);
     }
 }

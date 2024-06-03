@@ -1,0 +1,75 @@
+header {
+    height: 3.2rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1.6rem;
+    padding: 1.6rem;
+    background-color: brown;
+    box-sizing: content-box;
+
+    position: sticky;
+    top: 0;
+}
+
+/* Utility class */
+.hidden {
+    display: none;
+    animation: fadeIn .5s ease-in;
+}
+
+.logo {
+    font-size: 2.4rem;
+    transform: translateY(.2rem);
+}
+
+.search-wrapper {
+    position: relative;
+    height: 100%;
+    flex-grow: 2;
+}
+
+.search-wrapper .search-bar {
+    height: 100%;
+    width: 100%;
+    border-radius: 2rem;
+    border: 1px solid black;
+    padding-left: 1rem;
+    padding-right: 3rem;
+    outline: 0;
+}
+
+.search-wrapper .clear-search-bar {
+    position: absolute;
+    right: .5rem;
+    top: 50%;
+    transform: translateY(-50%);
+    padding: .5rem;
+    cursor: pointer;
+    width: 2.2rem;
+    height: 2.2rem;
+    animation: fadeIn .1s ease-in;
+}
+
+header .me {
+    background-color: black;
+    color: wheat;
+    font-weight: 700;
+    height: 100%;
+    aspect-ratio: 1.6/1;
+    border-radius: 3rem;
+    border: 0;
+
+    display: grid;
+    place-items: center;
+    cursor: pointer;
+}
+
+header .login-link {
+    color: wheat;
+    text-decoration: none;
+}
+
+.head a {
+    text-decoration: none;
+}

@@ -1,0 +1,8 @@
+a {
+    text-decoration: none;
+}
+
+.actions-wrapper {
+    display: flex;
+    justify-content: space-between;
+}

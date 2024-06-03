@@ -8,15 +8,13 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-    <link rel="stylesheet" href="./../../public/css/reset.css">
-    <link rel="stylesheet" href="./css/reset.css">
-    <link rel="stylesheet" href="./../../public/css/form-styles.css">
-    <link rel="stylesheet" href="./css/form-styles.css">
+    <link rel="stylesheet" href="<?php echo BASE_URL."css/reset.css" ?>">
+    <link rel="stylesheet" href="<?php echo BASE_URL."css/form-styles.css" ?>">
 </head>
 <body>
     <div class="container">
         <h1>Entrar</h1>
-        <form action="<?php echo BASE_URL . 'public/login/authenticate';?>" method="POST">
+        <form action="<?php echo BASE_URL . "login" ?>" method="POST">
             <div class="form-group">
                 <label for="nameId">Nome de Usuário</label>
                 <input type="text" name="name" id="nameId">
@@ -30,7 +28,7 @@
             <button type="submit">Entrar</button>
         </form>
 
-        <a href="<?php echo BASE_URL . 'public/register';?>" >Criar Conta</a>
+        <a href="<?php echo BASE_URL . 'register' ?>" >Criar Conta</a>
     </div>
 </body>
 </html>

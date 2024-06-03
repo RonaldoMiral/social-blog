@@ -1,18 +1,28 @@
 * {
-    box-sizing: border-box;
-    padding: 0;
-    margin: 0;
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
 }
 
 :root {
-    font-size: 62.5%;
+  font-size: 62.5%;
 }
 
 body {
-    font-size: 1.6rem;
-    font-family: "Rubik", sans-serif;
+  font-size: 1.6rem;
+  font-family: "Rubik", sans-serif;
+  min-height: 100vh;
+
+  display: grid;
+  grid-template-rows: auto 1fr auto;
 }
 
-input, button {
-    font-family: "Rubik", sans-serif;
+main {
+  padding: 1.6rem;
 }
+
+input,
+button {
+  font-family: "Rubik", sans-serif;
+}
+

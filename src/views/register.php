@@ -9,16 +9,14 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-    <link rel="stylesheet" href="./../../public/css/reset.css">
-    <link rel="stylesheet" href="./css/reset.css">
-    <link rel="stylesheet" href="./../../public/css/form-styles.css">
-    <link rel="stylesheet" href="./css/form-styles.css">
+    <link rel="stylesheet" href="<?php echo BASE_URL."css/reset.css" ?>">
+    <link rel="stylesheet" href="<?php echo BASE_URL."css/form-styles.css" ?>">
 </head>
 
 <body>
     <div class="container">
         <h1>Criar Conta</h1>
-        <form action="<?php echo BASE_URL.'public/register/new-user';?>" method="post">
+        <form action="<?php echo BASE_URL.'register';?>" method="post">
             <div class="form-group">
                 <label for="nameId">Nome de Usuário</label>
                 <input type="text" name="name" id="nameId">
@@ -39,7 +37,7 @@
             <button type="submit" name="sender">Submeter</button>
         </form>
 
-        <a href="<?php echo BASE_URL.'public/login';?>">Entrar</a>
+        <a href="<?php echo BASE_URL.'login';?>">Entrar</a>
     </div>
 
     <script>

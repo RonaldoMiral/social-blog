@@ -1,5 +1,6 @@
 <?php
     require_once preg_replace("/src.*/", "config/config.php", __DIR__);
+    $url = $_GET["url"];
 ?>
 
 <!DOCTYPE html>
@@ -9,14 +10,12 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-    <link rel="stylesheet" href="./../../public/css/reset.css">
-    <link rel="stylesheet" href="./css/reset.css">
-    <link rel="stylesheet" href="./../../public/css/create-post.css">
-    <link rel="stylesheet" href="./css/create-post.css">
+    <link rel="stylesheet" href="<?php echo BASE_URL."css/reset.css" ?>">
+    <link rel="stylesheet" href="<?php echo BASE_URL."css/create-post.css" ?>">
 </head>
 
 <body>
-    <form action="<?php echo BASE_URL.'public/create-post';?>" method="POST">
+    <form action="<?php echo BASE_URL . $url ?>" method="POST">
         <h1>New Post</h1>
         <div class="form-group">
             <label for="titleId">Título</label>
